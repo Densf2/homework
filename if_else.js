@@ -35,3 +35,9 @@ if (num215 > 300) {
               (num215 >= 250) ? 'ternary num greater than 250' :
               'ternary false'
               console.log(resTernary)
+
+let val2 = 'txt'
+
+if (val2 == 'New York') {
+    // action
+}
