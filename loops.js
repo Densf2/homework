@@ -18,10 +18,17 @@ let num = 10
 
 let sumOfLoop = 0
 
+// for (let i = 0; i <= num; i+=2) {
+//     console.log(i)
+//     if (i == 6) break
+//     sumOfLoop += i
+// }
+
+
 for (let i = 0; i <= num; i+=2) {
+    
+    if (i == 6) continue
     console.log(i)
-    if (i == 6) break
     sumOfLoop += i
 }
-
 console.log(sumOfLoop)
