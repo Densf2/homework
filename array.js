@@ -18,7 +18,7 @@ arr1[3] = 'New'
 
 // console.log(arr1.at(-3))
 
-async function getOnly(baseArr) {
+async function getOnlyStringFromArr(baseArr) {
 let result = [];
 resultWithUpperC = [];
 
@@ -37,5 +37,5 @@ for (let y = 0; y < result.length; y++) {
 }
 console.log(resultWithUpperC)
 }
-getOnly(arr1)
+getOnlyStringFromArr(arr1)
 
