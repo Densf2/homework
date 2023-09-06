@@ -19,7 +19,6 @@ function addNumberProperty(obj, propName, propValue) {
   }
 
 
-  addNumberProperty(objMy, number, 390903) //this code will add property with number value
+  addNumberProperty(objMy, 'myNumber', 390903) //this code will add property with number value
 
-  addNumberProperty(objMy, address, 'Street') // should be failure 
-  
+  addNumberProperty(objMy, 'myAddress', 'Street') // should be failure 
