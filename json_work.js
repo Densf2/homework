@@ -78,14 +78,27 @@
 
 // fs.writeFileSync(path, JSON.stringify(ddd))
 const fs = require('fs-extra');
-const path = './values.json';
+// const path = './values.json';
 
-async function func1() {
-    let ddd = await JSON.parse(fs.readFileSync(path, 'utf-8'))
-    console.log(ddd)
-    console.log('Hello from async function')
-    ddd.dkd = 'DKD'
-    await fs.writeFile(path, JSON.stringify(ddd))
+// async function func1() {
+//     let ddd = await JSON.parse(fs.readFileSync(path, 'utf-8'))
+//     console.log(ddd)
+//     console.log('Hello from async function')
+//     ddd.dkd = 'DKD'
+//     await fs.writeFile(path, JSON.stringify(ddd))
+// }
+
+// func1()
+
+let arrN = []
+async function readJsonAndWriteName(path='./response_1694287579730.json') {
+    let jsonData2 = await fs.readJson(path)
+
+    for (let element of jsonData2.data) {
+        arrN.push(element['first_name'])
+    }
+    console.log(arrN)
+    await fs.writeJson('names.json', JSON.stringify(arrN))
 }
 
-func1()
+readJsonAndWriteName()
