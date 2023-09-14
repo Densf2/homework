@@ -77,7 +77,7 @@
 // ddd.newVAl = 'Myval'
 
 // fs.writeFileSync(path, JSON.stringify(ddd))
-const fs = require('fs-extra');
+
 // const path = './values.json';
 
 // async function func1() {
@@ -90,8 +90,9 @@ const fs = require('fs-extra');
 
 // func1()
 
+
 let arrN = []
-async function readJsonAndWriteName(path='./response_1694287579730.json') {
+async function readJsonAndWriteName(path) {
     let jsonData2 = await fs.readJson(path)
 
     for (let element of jsonData2.data) {
@@ -101,4 +102,41 @@ async function readJsonAndWriteName(path='./response_1694287579730.json') {
     await fs.writeJson('names.json', JSON.stringify(arrN))
 }
 
-readJsonAndWriteName()
+// readJsonAndWriteName()
+import fs from 'fs-extra'
+import fetch from 'node-fetch';
+
+async function getDataReqres() {
+    let response = await fetch('https://reqres.in/api/users?page=2&per_page=5')
+    let data = await response.json()
+    await fs.writeFile('responseRreqres.json', JSON.stringify(data))
+}
+// getDataReqres()
+
+// readJsonAndWriteName('responseRreqres.json')
+
+
+const dataUser = {
+    "username": "Frank",
+    "email": "frank@mail.com",
+    "password": "54Tr90i30o3o@"
+}
+
+async function createUser(data) {
+    try {
+        const response = await fetch('https://reqres.in/api/user/register', 
+        {method: 'POST',
+        body: JSON.stringify(data),
+        headers: {'Content-Type': 'application/json'}
+        })
+
+        const dataRStatusCode = await response.status
+        const responsed = await response.json()
+        console.log(dataRStatusCode)
+        console.log(responsed)
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+createUser(dataUser)
