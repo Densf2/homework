@@ -1,3 +1,10 @@
+import fs from 'fs-extra'
+import fetch from 'node-fetch'
+import log4js from 'log4js'
+
+const logger = log4js.getLogger()
+logger.level = "debug"
+
 // const values = require('./values.json')
 // const fs = require('fs-extra')
 // const { writeFile, readFile } = require('fs-extra');
@@ -103,8 +110,6 @@ async function readJsonAndWriteName(path) {
 }
 
 // readJsonAndWriteName()
-import fs from 'fs-extra'
-import fetch from 'node-fetch';
 
 async function getDataReqres() {
     let response = await fetch('https://reqres.in/api/users?page=2&per_page=5')
@@ -129,9 +134,17 @@ async function createUser(data) {
         body: JSON.stringify(data),
         headers: {'Content-Type': 'application/json'}
         })
+        logger.debug("request was send successfully")
+
+        logger.debug("Got cheese.");
+        logger.info("Cheese is Comté.");
+        logger.warn("Cheese is quite smelly.");
+        logger.error("Cheese is too ripe!");
+        logger.fatal("Cheese was breeding ground for listeria.");
 
         const dataRStatusCode = await response.status
         const responsed = await response.json()
+        logger.debug(dataRStatusCode)
         console.log(dataRStatusCode)
         console.log(responsed)
     } catch(error) {
