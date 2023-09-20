@@ -1,6 +1,7 @@
 {
   "name": "homework",
   "version": "1.0.0",
+  "type": "module",
   "description": "package contains code for learning JS",
   "main": "json_work.js",
   "scripts": {
@@ -18,5 +19,9 @@
   "homepage": "https://github.com/Densf2/homework#readme",
   "dependencies": {
     "fs-extra": "^11.1.1"
+  },
+  "devDependencies": {
+    "log4js": "^6.9.1",
+    "node-fetch": "^3.3.2"
   }
 }

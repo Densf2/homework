@@ -1,3 +1,10 @@
+import fs from 'fs-extra'
+import fetch from 'node-fetch'
+import log4js from 'log4js'
+
+const logger = log4js.getLogger()
+logger.level = "debug"
+
 // const values = require('./values.json')
 // const fs = require('fs-extra')
 // const { writeFile, readFile } = require('fs-extra');
@@ -77,15 +84,72 @@
 // ddd.newVAl = 'Myval'
 
 // fs.writeFileSync(path, JSON.stringify(ddd))
-const fs = require('fs-extra');
-const path = './values.json';
 
-async function func1() {
-    let ddd = await JSON.parse(fs.readFileSync(path, 'utf-8'))
-    console.log(ddd)
-    console.log('Hello from async function')
-    ddd.dkd = 'DKD'
-    await fs.writeFile(path, JSON.stringify(ddd))
+// const path = './values.json';
+
+// async function func1() {
+//     let ddd = await JSON.parse(fs.readFileSync(path, 'utf-8'))
+//     console.log(ddd)
+//     console.log('Hello from async function')
+//     ddd.dkd = 'DKD'
+//     await fs.writeFile(path, JSON.stringify(ddd))
+// }
+
+// func1()
+
+
+let arrN = []
+async function readJsonAndWriteName(path) {
+    let jsonData2 = await fs.readJson(path)
+
+    for (let element of jsonData2.data) {
+        arrN.push(element['first_name'])
+    }
+    console.log(arrN)
+    await fs.writeJson('names.json', JSON.stringify(arrN))
 }
 
-func1()
+// readJsonAndWriteName()
+
+async function getDataReqres() {
+    let response = await fetch('https://reqres.in/api/users?page=2&per_page=5')
+    let data = await response.json()
+    await fs.writeFile('responseRreqres.json', JSON.stringify(data))
+}
+// getDataReqres()
+
+// readJsonAndWriteName('responseRreqres.json')
+
+
+const dataUser = {
+    "username": "Frank",
+    "email": "frank@mail.com",
+    "password": "54Tr90i30o3o@"
+}
+
+async function createUser(data) {
+    try {
+        const response = await fetch('https://reqres.in/api/user/register', 
+        {method: 'POST',
+        body: JSON.stringify(data),
+        headers: {'Content-Type': 'application/json'}
+        })
+        logger.debug("request was send successfully")
+
+        logger.debug("Got cheese.");
+        logger.info("Cheese is Comté.");
+        logger.warn("Cheese is quite smelly.");
+        logger.error("Cheese is too ripe!");
+        logger.fatal("Cheese was breeding ground for listeria.");
+
+        const dataRStatusCode = await response.status
+        const responsed = await response.json()
+        logger.debug(dataRStatusCode)
+        console.log(dataRStatusCode)
+        console.log(responsed)
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+createUser(dataUser)
