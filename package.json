@@ -5,7 +5,10 @@
   "description": "package contains code for learning JS",
   "main": "json_work.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:open": "cypress open",
+    "cy:run_chrome": "cypress run --headless -b chrome",
+    "cy:run_chrome_headed": "cypress run --headed -b chrome"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,8 @@
     "fs-extra": "^11.1.1"
   },
   "devDependencies": {
+    "cypress": "^13.2.0",
+    "esm": "^3.2.25",
     "log4js": "^6.9.1",
     "node-fetch": "^3.3.2"
   }
