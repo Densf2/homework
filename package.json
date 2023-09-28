@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:open": "cypress open",
     "cy:run_chrome": "cypress run --headless -b chrome",
-    "cy:run_chrome_headed": "cypress run --headed -b chrome"
+    "cy:run_chrome_headed": "cypress run --headed -b chrome --env urlFromCli=$ENV_URL"
   },
   "repository": {
     "type": "git",
