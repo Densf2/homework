@@ -9,7 +9,7 @@ describe('Testing guru website', () => {
     })
 
     it('open the website guru', () => {
-        cy.get('h1.thick-heading').should('be.visible')
+        cy.get('h1.thick-heading', {timeout: 6000}).should('be.visible') //correct syntax of timeout
     })
 
     it.skip('check search and validate results', () => {
@@ -30,7 +30,7 @@ describe('Testing guru website', () => {
 
         cy.get('ul.sub-menu.clicked li').eq(7).find('a')
         .should('have.attr', 'href', '/software-testing.html')
-        .and('have.text', 'Software Testing').click()
+        .and('have.text', 'Software Testing', {timeout: 5000}).click()
 
         cy.get('div.code-block-1 + h2').should('contain', 'Software Testing Training Summary')
         .and('have.css', 'margin-top', '0px')

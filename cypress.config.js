@@ -5,6 +5,7 @@ export default defineConfig({
     experimentalStudio: true,
     viewportHeight: 900,
     viewportWidth: 1400,
+    defaultCommandTimeout: 4000,
     // baseUrl: 'https://www.cypress.io',
     retries: {
       openMode: 2,
