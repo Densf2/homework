@@ -35,6 +35,21 @@ describe('Testing guru website', () => {
         cy.get('div.code-block-1 + h2').should('contain', 'Software Testing Training Summary')
         .and('have.css', 'margin-top', '0px')
         cy.getCookie('authCoka').should('exist')
+        
+        cy.get('p strong').eq(1).then(($textFundamentalsELement) => {
+            cy.wrap($textFundamentalsELement).should('contain.text', 'Testing Fundamentals')
+        })
+    })
+
+    it('open the software from main page', () => {
+        // cy.get('a[title="Software Testing"]').then(($linkMainPage) => {
+        //     debugger
+        // })
+        cy.visit('/software-testing.html')
+        cy.log('Opened the soffdsdkflsdfklsdkfl testing page by link')
+        // added command for log mesage with cy.task functionality
+        cy.task('log', 'another message from js code')
+        cy.get('table.table').eq(0).pause()
     })
 
 })
