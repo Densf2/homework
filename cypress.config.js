@@ -8,11 +8,12 @@ export default defineConfig({
     defaultCommandTimeout: 4000,
     // baseUrl: 'https://www.cypress.io',
     retries: {
-      openMode: 2,
-      runMode: 2
+      openMode: 1,
+      runMode: 1
     },
     // specPattern: 'cypress/e2e/myTests/*.cy.js',
     setupNodeEvents(on, config) {
+      on('task', {log(message) {console.log(message); return null }})
       const newUrl = config.env.urlFromCli || 'https://www.guru99.com'
       config.baseUrl = newUrl
       return config
