@@ -16,6 +16,15 @@ export default defineConfig({
       on('task', {log(message) {console.log(message); return null }})
       const newUrl = config.env.urlFromCli || 'https://www.guru99.com'
       config.baseUrl = newUrl
+
+      on("before:browser:launch", (browser, launchOptions) => {
+        console.log(launchOptions.args);
+        if (browser.name === "chrome") {
+          launchOptions.args.push("--incognito");
+        }
+        return launchOptions;
+      });
+   
       return config
     },
   },
