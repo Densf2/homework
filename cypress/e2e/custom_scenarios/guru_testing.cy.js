@@ -1,6 +1,15 @@
 /// <reference types="cypress" />
 
+import MainPage from '../../pages/main.js'
+import PostmanPage from '../../pages/postman_page.js'
+import { global_data } from '../../data/global_text.js'
+
+// example of command for the test
+// ENV_URL=https://www.guru99.com npm run cy:run_chrome_headed -- --spec cypress/e2e/custom_scenarios/guru_testing.cy.js
+
 describe('Testing guru website', () => {
+    const mainpage = new MainPage()
+    const postmanpage = new PostmanPage()
 
     beforeEach(() => {
         // cy.visit('https://www.guru99.com')
@@ -41,6 +50,12 @@ describe('Testing guru website', () => {
         })
     })
 
+    it('click on postman link from dropdownlist POM', () => {
+        mainpage.dropdownlist().eq(0).click()
+        mainpage.elementindropdownlist().eq(16).should('have.text', global_data.postman_text).click()
+        postmanpage.imagewithPostmanDetails( {timeout: 10000} ).should('be.visible')
+    })
+
     it('open the software from main page', () => {
         // cy.get('a[title="Software Testing"]').then(($linkMainPage) => {
         //     debugger
@@ -49,7 +64,7 @@ describe('Testing guru website', () => {
         cy.log('Opened the soffdsdkflsdfklsdkfl testing page by link')
         // added command for log mesage with cy.task functionality
         cy.task('log', 'another message from js code')
-        cy.get('table.table').eq(0).pause()
+        // cy.get('table.table').eq(0).pause()
     })
 
 })
