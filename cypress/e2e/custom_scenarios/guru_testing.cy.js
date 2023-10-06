@@ -4,6 +4,9 @@ import MainPage from '../../pages/main.js'
 import PostmanPage from '../../pages/postman_page.js'
 import { global_data } from '../../data/global_text.js'
 
+// example of command for the test
+// ENV_URL=https://www.guru99.com npm run cy:run_chrome_headed -- --spec cypress/e2e/custom_scenarios/guru_testing.cy.js
+
 describe('Testing guru website', () => {
     const mainpage = new MainPage()
     const postmanpage = new PostmanPage()
