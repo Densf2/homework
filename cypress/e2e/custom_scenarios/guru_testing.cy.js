@@ -4,6 +4,9 @@ import MainPage from '../../pages/main.js'
 import PostmanPage from '../../pages/postman_page.js'
 import { global_data } from '../../data/global_text.js'
 
+//import the POM page object
+import { cucumberPage } from '../../pages/cucumber_testing_page.js'
+
 // example of command for the test
 // ENV_URL=https://www.guru99.com npm run cy:run_chrome_headed -- --spec cypress/e2e/custom_scenarios/guru_testing.cy.js
 
@@ -19,6 +22,9 @@ describe('Testing guru website', () => {
 
     it('open the website guru', () => {
         cy.get('h1.thick-heading', {timeout: 6000}).should('be.visible') //correct syntax of timeout
+        cy.url().then((currentUrl) => {
+            cy.task('saveUrl', currentUrl)
+        })
     })
 
     it.skip('check search and validate results', () => {
@@ -65,6 +71,13 @@ describe('Testing guru website', () => {
         // added command for log mesage with cy.task functionality
         cy.task('log', 'another message from js code')
         // cy.get('table.table').eq(0).pause()
+    })
+
+    //impementation of page object based on object instances. The same strcuture but
+    // different implementation
+    it('open cucumber page from main', () => {
+        cucumberPage.clickLinkOnMainPage()
+        cy.url().should('contain', '/cucumber-tutorials.html')
     })
 
 })
