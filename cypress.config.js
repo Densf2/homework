@@ -1,4 +1,5 @@
 import { defineConfig } from "cypress";
+import fs from "fs-extra";
 
 export default defineConfig({
   e2e: {
@@ -14,6 +15,7 @@ export default defineConfig({
     // specPattern: 'cypress/e2e/myTests/*.cy.js',
     setupNodeEvents(on, config) {
       on('task', {log(message) {console.log(message); return null }})
+      on('task', {saveUrl(url) {fs.writeFileSync('url.json', JSON.stringify(url)); return null }})
       const newUrl = config.env.urlFromCli || 'https://www.guru99.com'
       config.baseUrl = newUrl
 
