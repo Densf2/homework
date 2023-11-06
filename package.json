@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/Densf2/homework#readme",
   "dependencies": {
+    "@faker-js/faker": "^8.2.0",
+    "cypress-mongodb": "^6.2.0",
     "fs-extra": "^11.1.1"
   },
   "devDependencies": {

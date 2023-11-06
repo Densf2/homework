@@ -39,8 +39,10 @@ Cypress.Commands.add('loginAndSetLocalStorage', () => {
 		},
 	}).then((response) => {
 		const accessToken = response.body.token;
-		// Store the access token in local
+		// Store the access token in localstrorage
 		localStorage.setItem('auth-token', accessToken);
+        // store the token in json
+        
 	});
 })
 
@@ -58,6 +60,47 @@ Cypress.Commands.add('createNewCategory', (category) => {
             authorization: `${accessToken}`
         }
     }).then((response) => {
+        // steps fot getting the category id for the next iterations
+        const categoryId = response.body._id;
+		// Store the categoryId in Cypress environment variable
+        Cypress.env('categoryId', categoryId);
+
         return response.body
+    })
+})
+
+Cypress.Commands.add('createProduct', (position) => {
+
+    const accessToken = window.localStorage.getItem('auth-token');
+    const categoryId = Cypress.env('categoryId');
+
+    cy.request({
+        method: 'POST',
+        url: 'api/position',
+        body: {
+            category: categoryId,
+            cost: 1,
+            name: position
+        },
+        headers: {
+            authorization: `${accessToken}`
+        }
+    }).then((response) => {
+        return response.body
+    })
+})
+
+Cypress.Commands.add('removeCategoryById', () => {
+    const accessToken = window.localStorage.getItem('auth-token');
+    const categoryId = Cypress.env('categoryId');
+
+    cy.request({
+        method: 'DELETE',
+        url: `/api/category/${categoryId}`,
+        headers: {
+            authorization: `${accessToken}`
+        }
+    }).then((response) => {
+        expect(response.status).to.eq(200)
     })
 })
