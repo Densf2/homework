@@ -2,3 +2,4 @@ node_modules
 .vscode/
 cypress/reports/
 cypress/screenshots/
+cypress/.DS_Store
