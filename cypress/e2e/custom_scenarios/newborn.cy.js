@@ -20,7 +20,7 @@ describe('login with api request', () => {
         cy.task('log', categoryName)
         cy.visit('/categories')
         cy.wait(5000)
-        cy.get('.content a.collection-item', {timeout: 5000}).should('be.visible')
+        cy.get('content a.collection-item', {timeout: 5000}).should('be.visible')
     })
 
     it('create product for category', () => {
