@@ -1,6 +1,8 @@
 import { defineConfig } from "cypress";
 import fs from "fs-extra";
 import { configurePlugin } from "cypress-mongodb";
+import lib from 'cypress-mochawesome-reporter/lib/index.js'
+const {beforeRunHook, afterRunHook} = lib
 
 export default defineConfig({
   env: {
@@ -8,6 +10,14 @@ export default defineConfig({
       uri: 'mongodb://127.0.0.1:27017',
       database: 'test'
     }
+  },
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: 'HTML reports created by AQA wizard',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false,
   },
   e2e: {
     experimentalStudio: true,
@@ -35,6 +45,16 @@ export default defineConfig({
       });
       
       configurePlugin(on)
+
+      on('before:run', async (details) => {
+        console.log('override before:run');
+        await beforeRunHook(details);
+      });
+
+      on('after:run', async () => {
+        console.log('override after:run');
+        await afterRunHook();
+      });
 
       return config
     },
