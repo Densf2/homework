@@ -1,15 +1,17 @@
 import { defineConfig } from "cypress";
 import fs from "fs-extra";
 import { configurePlugin } from "cypress-mongodb";
+
 import lib from 'cypress-mochawesome-reporter/lib/index.js'
-const {beforeRunHook, afterRunHook} = lib
+
+const { beforeRunHook, afterRunHook } = lib
 
 export default defineConfig({
   env: {
     mongodb: {
       uri: 'mongodb://127.0.0.1:27017',
-      database: 'test'
-    }
+      database: 'test',
+    },
   },
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
@@ -27,12 +29,12 @@ export default defineConfig({
     // baseUrl: 'https://www.cypress.io',
     retries: {
       openMode: 1,
-      runMode: 1
+      runMode: 1,
     },
     // specPattern: 'cypress/e2e/myTests/*.cy.js',
     setupNodeEvents(on, config) {
-      on('task', {log(message) {console.log(message); return null }})
-      on('task', {saveUrl(url) {fs.writeFileSync('url.json', JSON.stringify(url)); return null }})
+      on('task', { log(message) { console.log(message); return null } })
+      on('task', { saveUrl(url) { fs.writeFileSync('url.json', JSON.stringify(url)); return null } })
       const newUrl = config.env.urlFromCli || 'https://www.guru99.com'
       config.baseUrl = newUrl
 
@@ -43,7 +45,7 @@ export default defineConfig({
         }
         return launchOptions;
       });
-      
+
       configurePlugin(on)
 
       on('before:run', async (details) => {
