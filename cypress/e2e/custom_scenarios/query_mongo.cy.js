@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb'
 // docker run --name mongo -p 27017:27017 -d mongodb/mongodb-community-server:6.0-ubuntu2204
 //docker exec -it mongo mongosh
 
-describe('Find data', () => {
+describe.skip('Find data', () => {
 
     context('usage of mongodb', () =>{
         it('findMany', () => {

@@ -1,0 +1,14 @@
+name: Trigger e2e UI tests
+
+on: push
+
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    name: trigger in chrome
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          spec: cypress/e2e/custom_scenarios/newborn.cy.js

@@ -17,6 +17,8 @@ describe('Testing guru website', () => {
     beforeEach(() => {
         // cy.visit('https://www.guru99.com')
         // cy.setCookie('authCoka', 'someCookie')
+        const BaseUrl1 = Cypress.env('guruTestingUrl')
+        Cypress.config('baseUrl', BaseUrl1)
         cy.loginAndSetCookie('/', 'authCoka', 'someCookie')
     })
 

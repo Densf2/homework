@@ -8,6 +8,8 @@ const { beforeRunHook, afterRunHook } = lib
 
 export default defineConfig({
   env: {
+    newbornUrl: 'http://5.189.186.217',
+    guruTestingUrl: 'https://www.guru99.com',
     mongodb: {
       uri: 'mongodb://127.0.0.1:27017',
       database: 'test',
@@ -26,7 +28,7 @@ export default defineConfig({
     viewportHeight: 900,
     viewportWidth: 1400,
     defaultCommandTimeout: 4000,
-    // baseUrl: 'https://www.cypress.io',
+    baseUrl: 'https://www.cypress.io',
     retries: {
       openMode: 1,
       runMode: 1,
@@ -35,8 +37,8 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       on('task', { log(message) { console.log(message); return null } })
       on('task', { saveUrl(url) { fs.writeFileSync('url.json', JSON.stringify(url)); return null } })
-      const newUrl = config.env.urlFromCli || 'https://www.guru99.com'
-      config.baseUrl = newUrl
+      // const newUrl = Cypress.env('ENV_URL') || 'https://www.guru99.com'
+      // config.baseUrl = newUrl
 
       on("before:browser:launch", (browser, launchOptions) => {
         console.log(launchOptions.args);
