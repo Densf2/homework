@@ -13,7 +13,7 @@ jobs:
       options: --user 1001
     steps:
       - name: Checkout project
-        run: actions/checkout@v4
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: npm install --force
       - name: Run tests
