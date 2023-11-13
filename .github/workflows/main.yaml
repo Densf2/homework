@@ -1,6 +1,9 @@
-name: Trigger e2e UI tests
+name: e2e UI tests in docker
 
-on: push
+on: 
+  push:
+    branches:
+      - "ga-docker"
 
 jobs:
   chrome:
