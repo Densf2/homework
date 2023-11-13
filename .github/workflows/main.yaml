@@ -3,7 +3,7 @@ name: e2e UI tests in docker
 on: 
   push:
     branches:
-      - "ga-docker"
+      - "ga_docker"
 
 jobs:
   cypress-run:
