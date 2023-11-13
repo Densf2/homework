@@ -6,12 +6,26 @@ on:
       - "ga-docker"
 
 jobs:
-  chrome:
-    runs-on: ubuntu-latest
-    name: trigger in chrome
+  cypress-run:
+    runs-on: ubuntu-22.04
+    container:
+      image: cypress/browsers:node-20.6.1-chrome-116.0.5845.187-1-ff-117.0-edge-116.0.1938.76-1
+      options: --user 1001
     steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
+      - name: Checkout project
+        run: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install --force
+      - name: Run tests
+        run: npm run cy:run_chrome
+      - name: Save report
+        uses: actions/upload-artifact@v3
+        with: 
+          path: cypress/reports/html
+          name: Main report
+        if: failure() || success()
+      - name: Get report
+        uses: actions/download-artifact@v3
         with:
-          browser: chrome
-          spec: cypress/e2e/custom_scenarios/newborn.cy.js
+          name: Main report
+        if: failure() || success()
