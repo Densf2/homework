@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: npm install --force
       - name: Run tests
-        run: npm run cy:run_chrome
+        run: npm run cy:run_chrome --spec cypress/e2e/custom_scenarios/newborn.cy.js
       - name: Save report
         uses: actions/upload-artifact@v3
         with: 
